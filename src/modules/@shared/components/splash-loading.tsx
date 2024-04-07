@@ -9,7 +9,7 @@ export default function SplashLoading() {
   useEffect(() => {
     try {
       const state = JSON.parse(localStorage.getItem("persist:root") || "");
-      const uiState = JSON.parse(state.ui || "");
+      const uiState = JSON.parse(state?.ui || "");
 
       const root = window.document.documentElement;
       root.classList.remove(EThemeType.light, EThemeType.dark);
