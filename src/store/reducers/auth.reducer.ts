@@ -28,7 +28,7 @@ const { actions: mutations, reducer } = createSlice({
 export const authActions = {
   reset: () => store.dispatch(mutations.reset()),
   setToken: (payload: string) => store.dispatch(mutations.setToken(payload)),
-  setUserData: (payload: IUser) => store.dispatch(mutations.setUser(payload)),
+  setUser: (payload: IUser) => store.dispatch(mutations.setUser(payload)),
 };
 
 export default reducer;

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { uiActions } from "@/store/reducers/ui.reducer";
 import { createContext, useContext, useEffect } from "react";
 import { EThemeType } from "@/modules/@shared/enums/theme.enum";
+import { TooltipProvider } from "@/_shad/components/ui/tooltip";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -25,7 +26,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = EThemeType.system,
+  defaultTheme = EThemeType.dark,
   ...props
 }: ThemeProviderProps) {
   const { theme } = useSelector((state: RootState) => state.ui);
@@ -59,7 +60,7 @@ export function ThemeProvider({
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
-      {children}
+      <TooltipProvider>{children}</TooltipProvider>
     </ThemeProviderContext.Provider>
   );
 }

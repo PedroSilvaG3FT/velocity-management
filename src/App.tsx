@@ -1,11 +1,24 @@
+import { RouterProvider } from "react-router-dom";
 import { WrapperProvider } from "./contexts/wrapper.context";
-import { ToggleTheme } from "./modules/@shared/components/toggle-theme";
+
+import { createBrowserRouter } from "react-router-dom";
+import RouteGuardWrapper from "./modules/@shared/guards/route.guard";
+import { AUTHENTICATION_ROUTES } from "./modules/authentication/pages/routes";
+import { MAIN_ROUTES } from "./modules/main/pages/routes";
+
+export const AppRoutes = createBrowserRouter([
+  { path: "*", element: <RouteGuardWrapper /> },
+  {
+    path: "/",
+    element: <RouteGuardWrapper />,
+    children: [...MAIN_ROUTES, ...AUTHENTICATION_ROUTES],
+  },
+]);
 
 function App() {
   return (
     <WrapperProvider>
-      <ToggleTheme />
-      <h1>Hello World</h1>
+      <RouterProvider router={AppRoutes} />
     </WrapperProvider>
   );
 }

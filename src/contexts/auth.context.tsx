@@ -25,8 +25,16 @@ const AuthContext = createContext<IAuthContext>({
 const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   const { user, token } = useSelector((state: RootState) => state.auth);
 
-  const signOut = () => authActions.reset();
-  const signIn = async () => {};
+  const signOut = () => {
+    authActions.reset();
+  };
+  const signIn = async () => {
+    authActions.setToken("user_token");
+    authActions.setUser({
+      name: "Pedro Silva",
+      email: "pedro.silva-dev@hotmail.com",
+    });
+  };
 
   const providerValue: IAuthContext = {
     user,

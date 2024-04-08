@@ -21,9 +21,9 @@ const WrapperProvider: React.FC<IWrapperProviderProps> = ({ children }) => {
           loading={<SplashLoading />}
           persistor={persistStore(store)}
         >
-          <ThemeProvider>
-            <AuthProvider>{children}</AuthProvider>
-          </ThemeProvider>
+          <AuthProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </AuthProvider>
         </PersistGate>
       </Provider>
     </WrapperContext.Provider>

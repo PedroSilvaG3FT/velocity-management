@@ -3,7 +3,7 @@ import store from "../";
 import { EThemeType } from "@/modules/@shared/enums/theme.enum";
 
 const initialState = {
-  theme: EThemeType.system,
+  theme: EThemeType.dark,
 };
 
 const { actions: mutations, reducer } = createSlice({
