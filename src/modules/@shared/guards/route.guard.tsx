@@ -1,20 +1,19 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../store";
+import authStore from "@/store/auth.store";
 import { Outlet, useNavigate } from "react-router-dom";
 
 const RouteGuardWrapper: React.FC = () => {
   const navigate = useNavigate();
-  const { user, firebaseToken } = useSelector((state: RootState) => state.auth);
+  const _authStore = authStore((state) => state);
 
   const checkUserToken = () => {
-    if (firebaseToken) navigate(`/home`);
+    if (_authStore.firebaseToken) navigate(`/home`);
     else navigate(`/auth/sign-in`);
   };
 
   useEffect(() => {
     checkUserToken();
-  }, [user]);
+  }, [_authStore.user]);
 
   return <Outlet />;
 };

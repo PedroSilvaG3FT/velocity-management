@@ -1,10 +1,8 @@
-import { RootState } from "../store";
-import { useSelector } from "react-redux";
 import React, { createContext } from "react";
-import { authActions } from "../store/reducers/auth.reducer";
 import { IUser } from "../modules/@shared/interfaces/user.interface";
 import { UserService } from "@/modules/@shared/services/user.service";
 import { DatabaseModel } from "@/modules/@shared/models/database.model";
+import authStore from "@/store/auth.store";
 
 interface IAuthContext {
   user: IUser;
@@ -28,10 +26,10 @@ const userService = new UserService();
 const databaseModel = new DatabaseModel();
 
 const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
-  const { user, firebaseToken } = useSelector((state: RootState) => state.auth);
+  const _authStore = authStore((state) => state);
 
   const signOut = () => {
-    authActions.reset();
+    _authStore.reset();
   };
 
   const signIn = async (email: string, password: string) => {
@@ -43,19 +41,19 @@ const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
       const { refreshToken, accessToken, data } = response.user;
 
-      authActions.setFirebaseToken(accessToken);
-      authActions.setFirebaseRefreshToken(refreshToken);
-      authActions.setUser(databaseModel.user.buildItem(data));
+      _authStore.setFirebaseToken(accessToken);
+      _authStore.setFirebaseRefreshToken(refreshToken);
+      _authStore.setUser(databaseModel.user.buildItem(data));
     } catch (error) {
       throw error;
     }
   };
 
   const providerValue: IAuthContext = {
-    user,
+    user: _authStore.user,
     signIn,
     signOut,
-    firebaseToken,
+    firebaseToken: _authStore.firebaseToken,
   };
 
   return (

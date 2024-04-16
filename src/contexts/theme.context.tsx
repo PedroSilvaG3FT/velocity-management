@@ -1,9 +1,7 @@
-import { RootState } from "@/store";
-import { useSelector } from "react-redux";
-import { uiActions } from "@/store/reducers/ui.reducer";
 import { createContext, useContext, useEffect } from "react";
 import { EThemeType } from "@/modules/@shared/enums/theme.enum";
 import { TooltipProvider } from "@/_shad/components/ui/tooltip";
+import uiStore from "@/store/ui.store";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
@@ -29,7 +27,8 @@ export function ThemeProvider({
   defaultTheme = EThemeType.dark,
   ...props
 }: ThemeProviderProps) {
-  const { theme } = useSelector((state: RootState) => state.ui);
+  const _uiStore = uiStore((state) => state);
+  const theme = _uiStore.theme;
 
   const getSystemTheme = () => {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -54,7 +53,7 @@ export function ThemeProvider({
     theme,
     getSystemTheme,
     setTheme: (theme: EThemeType) => {
-      uiActions.setTheme(theme);
+      _uiStore.setTheme(theme);
     },
   };
 

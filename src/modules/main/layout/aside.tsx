@@ -4,11 +4,14 @@ import {
   TooltipTrigger,
 } from "@/_shad/components/ui/tooltip";
 import { useNavigate } from "react-router-dom";
-import { Settings, Package2 } from "lucide-react";
+import { Package2, LogOut } from "lucide-react";
 import { MAIN_MENU_ITEMS } from "../constants/menu.constant.tsx";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/auth.context.tsx";
 
 export default function AppAside() {
   const navigate = useNavigate();
+  const { signOut } = useContext(AuthContext);
 
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -37,9 +40,11 @@ export default function AppAside() {
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <Tooltip>
           <TooltipTrigger asChild>
-            <a className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8">
-              <Settings className="h-5 w-5" />
-              <span className="sr-only">Settings</span>
+            <a
+              onClick={signOut}
+              className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors cursor-pointer hover:text-foreground md:h-8 md:w-8"
+            >
+              <LogOut className="h-5 w-5" />
             </a>
           </TooltipTrigger>
           <TooltipContent side="right">Settings</TooltipContent>
