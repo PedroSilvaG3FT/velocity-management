@@ -5,10 +5,10 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 const RouteGuardWrapper: React.FC = () => {
   const navigate = useNavigate();
-  const { user, token } = useSelector((state: RootState) => state.auth);
+  const { user, firebaseToken } = useSelector((state: RootState) => state.auth);
 
   const checkUserToken = () => {
-    if (token) navigate(`/home`);
+    if (firebaseToken) navigate(`/home`);
     else navigate(`/auth/sign-in`);
   };
 

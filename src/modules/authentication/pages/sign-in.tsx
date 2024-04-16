@@ -1,20 +1,36 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Input } from "@/_shad/components/ui/input";
-import { Label } from "@/_shad/components/ui/label";
 import { Button } from "@/_shad/components/ui/button";
 import { AuthContext } from "@/contexts/auth.context";
 import AuthenticationPageNav from "../components/page-nav";
+
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormContainer } from "@/_shad/components/ui/form";
+import AppFormInput from "@/modules/@shared/components/form/form-input";
+
+const formSchema = z.object({
+  email: z.string().min(1, "Required field"),
+  password: z.string().min(1, "Required field"),
+});
 
 export default function SignIn() {
   const navigate = useNavigate();
   const { signIn } = useContext(AuthContext);
 
-  const handleSubmit = () => {
-    signIn().then(() => {
-      navigate("/home");
-    });
-  };
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: { email: "", password: "" },
+  });
+
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    signIn(values.email, values.password)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   return (
     <section className="animate__animated animate__fadeIn">
@@ -23,45 +39,43 @@ export default function SignIn() {
         subtitle="Enter your email below to login to your account"
       />
 
-      <form className="grid gap-4" onSubmit={handleSubmit}>
-        <div className="grid gap-2">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            required
-            id="email"
+      <FormContainer {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <AppFormInput
+            name="email"
             type="email"
+            label="Email"
+            control={form.control}
             placeholder="Insert your e-mail"
           />
-        </div>
 
-        <div className="grid gap-2">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            required
-            id="password"
+          <AppFormInput
+            name="password"
             type="password"
+            label="Password"
+            control={form.control}
             placeholder="**********"
           />
-        </div>
 
-        <a
-          onClick={() => navigate("/auth/forgot-password")}
-          className="ml-auto inline-block text-sm underline"
-        >
-          Forgot your password?
-        </a>
-
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-
-        <div className="mt-4 text-center text-sm">
-          Don't have an account?{" "}
-          <a onClick={() => navigate("/auth/sign-up")} className="underline">
-            Sign up
+          <a
+            onClick={() => navigate("/auth/forgot-password")}
+            className="ml-auto inline-block text-sm underline"
+          >
+            Forgot your password?
           </a>
-        </div>
-      </form>
+
+          <Button type="submit" className="w-full">
+            Submit
+          </Button>
+
+          <div className="mt-4 text-center text-sm">
+            Don't have an account?{" "}
+            <a onClick={() => navigate("/auth/sign-up")} className="underline">
+              Sign up
+            </a>
+          </div>
+        </form>
+      </FormContainer>
     </section>
   );
 }

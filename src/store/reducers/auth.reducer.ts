@@ -3,23 +3,26 @@ import { createSlice } from "@reduxjs/toolkit";
 import { IUser } from "../../modules/@shared/interfaces/user.interface";
 
 const initialState = {
-  token: ``,
   user: {} as IUser,
+  firebaseToken: ``,
+  firebaseRefreshToken: ``,
 };
 
 const { actions: mutations, reducer } = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setToken(state, { payload }) {
-      state.token = payload;
+    setFirebaseToken(state, { payload }) {
+      state.firebaseToken = payload;
+    },
+    setFirebaseRefreshToken(state, { payload }) {
+      state.firebaseRefreshToken = payload;
     },
     setUser(state, { payload }) {
       state.user = payload;
     },
-
     reset(state) {
-      state.token = "";
+      state.firebaseToken = "";
       state.user = {} as IUser;
     },
   },
@@ -27,8 +30,11 @@ const { actions: mutations, reducer } = createSlice({
 
 export const authActions = {
   reset: () => store.dispatch(mutations.reset()),
-  setToken: (payload: string) => store.dispatch(mutations.setToken(payload)),
   setUser: (payload: IUser) => store.dispatch(mutations.setUser(payload)),
+  setFirebaseToken: (payload: string) =>
+    store.dispatch(mutations.setFirebaseToken(payload)),
+  setFirebaseRefreshToken: (payload: string) =>
+    store.dispatch(mutations.setFirebaseRefreshToken(payload)),
 };
 
 export default reducer;
