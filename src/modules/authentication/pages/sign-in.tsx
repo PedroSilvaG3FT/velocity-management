@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormContainer } from "@/_shad/components/ui/form";
 import AppFormInput from "@/modules/@shared/components/form/form-input";
+import Animate from "@/modules/@shared/components/utils/animate";
 
 const formSchema = z.object({
   email: z.string().min(1, "Required field"),
@@ -33,49 +34,54 @@ export default function SignIn() {
   }
 
   return (
-    <section className="animate__animated animate__fadeIn">
-      <AuthenticationPageNav
-        title="Login"
-        subtitle="Enter your email below to login to your account"
-      />
+    <Animate animation="fadeIn">
+      <section>
+        <AuthenticationPageNav
+          title="Login"
+          subtitle="Enter your email below to login to your account"
+        />
 
-      <FormContainer {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          <AppFormInput
-            name="email"
-            type="email"
-            label="Email"
-            control={form.control}
-            placeholder="Insert your e-mail"
-          />
+        <FormContainer {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <AppFormInput
+              name="email"
+              type="email"
+              label="Email"
+              control={form.control}
+              placeholder="Insert your e-mail"
+            />
 
-          <AppFormInput
-            name="password"
-            type="password"
-            label="Password"
-            control={form.control}
-            placeholder="**********"
-          />
+            <AppFormInput
+              name="password"
+              type="password"
+              label="Password"
+              control={form.control}
+              placeholder="**********"
+            />
 
-          <a
-            onClick={() => navigate("/auth/forgot-password")}
-            className="ml-auto inline-block text-sm underline"
-          >
-            Forgot your password?
-          </a>
-
-          <Button type="submit" className="w-full">
-            Submit
-          </Button>
-
-          <div className="mt-4 text-center text-sm">
-            Don't have an account?{" "}
-            <a onClick={() => navigate("/auth/sign-up")} className="underline">
-              Sign up
+            <a
+              onClick={() => navigate("/auth/forgot-password")}
+              className="ml-auto inline-block text-sm underline"
+            >
+              Forgot your password?
             </a>
-          </div>
-        </form>
-      </FormContainer>
-    </section>
+
+            <Button type="submit" className="w-full">
+              Submit
+            </Button>
+
+            <div className="mt-4 text-center text-sm">
+              Don't have an account?{" "}
+              <a
+                onClick={() => navigate("/auth/sign-up")}
+                className="underline"
+              >
+                Sign up
+              </a>
+            </div>
+          </form>
+        </FormContainer>
+      </section>
+    </Animate>
   );
 }

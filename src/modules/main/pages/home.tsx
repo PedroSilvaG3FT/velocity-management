@@ -21,6 +21,9 @@ import AppFormTextarea from "@/modules/@shared/components/form/form-textarea";
 import AppFormRadioGroup from "@/modules/@shared/components/form/form-radio-group";
 import AppFormDatepicker from "@/modules/@shared/components/form/form-datepicker";
 import { IFormOption } from "@/modules/@shared/components/_interfaces/form-option.interface";
+import Each from "@/modules/@shared/components/utils/each";
+import Show from "@/modules/@shared/components/utils/show";
+import { PinContainer } from "@/modules/@shared/components/aceternity/pin";
 
 const formSchema = z.object({
   input: z.string(),
@@ -125,7 +128,48 @@ export default function Home() {
             />
           </form>
         </FormContainer>
+
+        <section>
+          <h2>Each</h2>
+
+          <article>
+            <Each
+              data={defaultOptions}
+              render={(item) => <p>{item.label}</p>}
+            />
+          </article>
+
+          <h2>Condition</h2>
+
+          <article>
+            <Show>
+              <Show.When isTrue={form.getValues("radioGroup") == "1"}>
+                OPTION 1
+              </Show.When>
+              <Show.Else>NO Condition</Show.Else>
+            </Show>
+          </article>
+        </section>
       </section>
+
+      <div className="h-[40rem] w-full flex items-center justify-center ">
+        <PinContainer
+          title="/ui.aceternity.com"
+          href="https://twitter.com/mannupaaji"
+        >
+          <div className="flex basis-full flex-col p-4 tracking-tight text-slate-100/50 sm:basis-1/2 w-[20rem] h-[20rem] ">
+            <h3 className="max-w-xs !pb-2 !m-0 font-bold  text-base text-slate-100">
+              Aceternity UI
+            </h3>
+            <div className="text-base !m-0 !p-0 font-normal">
+              <span className="text-slate-500 ">
+                Customizable Tailwind CSS and Framer Motion Components.
+              </span>
+            </div>
+            <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500" />
+          </div>
+        </PinContainer>
+      </div>
 
       <section className="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
         <Card className="sm:col-span-2" x-chunk="dashboard-05-chunk-0">
