@@ -1,8 +1,9 @@
+import authStore from "@/store/auth.store";
 import React, { createContext } from "react";
+import loadingStore from "@/store/loading.store";
 import { IUser } from "../modules/@shared/interfaces/user.interface";
 import { UserService } from "@/modules/@shared/services/user.service";
 import { DatabaseModel } from "@/modules/@shared/models/database.model";
-import authStore from "@/store/auth.store";
 
 interface IAuthContext {
   user: IUser;
@@ -27,6 +28,7 @@ const databaseModel = new DatabaseModel();
 
 const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   const _authStore = authStore((state) => state);
+  const _loadingStore = loadingStore((state) => state);
 
   const signOut = () => {
     _authStore.reset();
@@ -34,6 +36,8 @@ const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
 
   const signIn = async (email: string, password: string) => {
     try {
+      _loadingStore.setShow(true);
+
       const response = await userService.signIn({
         email,
         password,
@@ -44,7 +48,10 @@ const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
       _authStore.setFirebaseToken(accessToken);
       _authStore.setFirebaseRefreshToken(refreshToken);
       _authStore.setUser(databaseModel.user.buildItem(data));
+
+      _loadingStore.setShow(false);
     } catch (error) {
+      _loadingStore.setShow(false);
       throw error;
     }
   };

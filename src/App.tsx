@@ -5,6 +5,7 @@ import { createBrowserRouter } from "react-router-dom";
 import RouteGuardWrapper from "./modules/@shared/guards/route.guard";
 import { AUTHENTICATION_ROUTES } from "./modules/authentication/pages/routes";
 import { MAIN_ROUTES } from "./modules/main/pages/routes";
+import AppLoading from "./modules/@shared/components/loading";
 
 export const AppRoutes = createBrowserRouter([
   { path: "*", element: <RouteGuardWrapper /> },
@@ -18,6 +19,7 @@ export const AppRoutes = createBrowserRouter([
 function App() {
   return (
     <WrapperProvider>
+      <AppLoading />
       <RouterProvider router={AppRoutes} />
     </WrapperProvider>
   );
