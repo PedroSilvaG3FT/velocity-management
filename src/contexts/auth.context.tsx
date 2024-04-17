@@ -1,7 +1,7 @@
 import authStore from "@/store/auth.store";
 import React, { createContext } from "react";
 import loadingStore from "@/store/loading.store";
-import { IUser } from "../modules/@shared/interfaces/user.interface";
+import { IUser } from "../modules/@shared/firebase/interfaces/user.interface";
 import { UserService } from "@/modules/@shared/firebase/services/user.service";
 import { DatabaseModel } from "@/modules/@shared/firebase/models/database.model";
 

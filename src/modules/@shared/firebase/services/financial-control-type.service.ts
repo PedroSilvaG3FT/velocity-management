@@ -1,5 +1,5 @@
 import { FirebaseCollectionBase } from "../base/firebase-collection.base";
-import { FIREBASE_COLLECTION } from "../@constans/firebase-collection.contant";
+import { FIREBASE_COLLECTION } from "../constans/firebase-collection.contant";
 
 export class FinancialControlTypeService extends FirebaseCollectionBase {
   constructor() {

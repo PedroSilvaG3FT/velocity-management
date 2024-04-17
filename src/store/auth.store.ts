@@ -1,5 +1,5 @@
 import { createStore } from "./_base.store";
-import { IUser } from "@/modules/@shared/interfaces/user.interface";
+import { IUser } from "@/modules/@shared/firebase/interfaces/user.interface";
 
 interface State {
   user: IUser;

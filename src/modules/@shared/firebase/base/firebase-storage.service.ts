@@ -10,7 +10,7 @@ import {
 } from "firebase/storage";
 import { generateUUID } from "../../functions/uuid.function";
 import { DownloadUtil } from "../../util/download.util";
-import { FIREBASE_STORAGE_ERROR_LIST } from "../@constans/firebase-error.constant";
+import { FIREBASE_STORAGE_ERROR_LIST } from "../constans/firebase-error.constant";
 import { FIREBASE_CONFIG } from "./firebase.config";
 
 export class FirebaseStorageService {
