@@ -1,10 +1,10 @@
 import { IMenuItem } from "../interfaces/menu.interface";
-import { Home, Users2, Package, LineChart, ShoppingCart } from "lucide-react";
+import { Home, CarFront, Apple, Dumbbell, HandCoins } from "lucide-react";
 
 export const MAIN_MENU_ITEMS: IMenuItem[] = [
-  { url: `home`, icon: Home, title: `Dashboard` },
-  { url: ``, icon: ShoppingCart, title: `Orders` },
-  { url: ``, icon: Package, title: `Products` },
-  { url: ``, icon: Users2, title: `Customers` },
-  { url: ``, icon: LineChart, title: `Analytics` },
+  { url: `home`, icon: Home, title: `Home` },
+  { url: `vehicle`, icon: CarFront, title: `Veiculos` },
+  { url: `feeding`, icon: Apple, title: `Alimentação` },
+  { url: `sport`, icon: Dumbbell, title: `Esportes` },
+  { url: `financial`, icon: HandCoins, title: `Financeiro` },
 ];
