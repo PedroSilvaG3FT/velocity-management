@@ -1,7 +1,7 @@
 import {
   ListDocumentSnapshot,
   SingleDocumentSnapshot,
-} from "./@types/firebase.type";
+} from "../@types/firebase.type";
 
 export class FirebaseCollectionHelper {
   public getDocumentData<Data>(snapshot: SingleDocumentSnapshot) {

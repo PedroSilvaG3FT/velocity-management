@@ -2,8 +2,8 @@ import authStore from "@/store/auth.store";
 import React, { createContext } from "react";
 import loadingStore from "@/store/loading.store";
 import { IUser } from "../modules/@shared/interfaces/user.interface";
-import { UserService } from "@/modules/@shared/services/user.service";
-import { DatabaseModel } from "@/modules/@shared/models/database.model";
+import { UserService } from "@/modules/@shared/firebase/services/user.service";
+import { DatabaseModel } from "@/modules/@shared/firebase/models/database.model";
 
 interface IAuthContext {
   user: IUser;

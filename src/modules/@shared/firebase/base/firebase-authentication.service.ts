@@ -11,7 +11,7 @@ import {
 } from "firebase/auth";
 
 import { FirebaseCollectionBase } from "./firebase-collection.base";
-import { IUserDB, IUserRegister } from "../interfaces/user.interface";
+import { IUserDB, IUserRegister } from "../../interfaces/user.interface";
 
 export interface IFirebaseAuthenticationCredentials {
   email: string;
