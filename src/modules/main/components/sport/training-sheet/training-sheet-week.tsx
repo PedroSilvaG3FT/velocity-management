@@ -9,13 +9,14 @@ import {
   ISportTrainingSheetItem,
 } from "@/modules/@shared/firebase/interfaces/sport-training-sheet.interface";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Circle, CircleCheck } from "lucide-react";
 import Each from "@/modules/@shared/components/utils/each";
 import Show from "@/modules/@shared/components/utils/show";
 import { Separator } from "@/_shad/components/ui/separator";
 import WeekDaySelection from "@/modules/@shared/components/week-day-selection";
 import { IWeekDayItem } from "@/modules/@shared/components/_interfaces/week.interface";
+import { WeekDayNumber } from "@/modules/@shared/components/_types/week.type";
 
 interface ITrainingSheetWeekProps {
   data: ISportTrainingSheetItem;
@@ -35,9 +36,18 @@ export default function TrainingSheetWeek(props: ITrainingSheetWeekProps) {
       6: "saturday",
     };
 
+    console.log(data);
+
     const key = dayKeyMap[item.day] as keyof typeof data;
     setDayView(data[key] as ISportTrainingSheetDay[]);
   };
+
+  useEffect(() => {
+    if (!dayView?.length) {
+      const date = new Date();
+      onSelectDay({ date, day: date.getDay() as WeekDayNumber });
+    }
+  }, [data]);
 
   return (
     <Card>

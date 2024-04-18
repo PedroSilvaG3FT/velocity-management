@@ -40,6 +40,30 @@ export default function Sport() {
     {} as ISportTrainingSheetItem
   );
 
+  const fakeExercice = {
+    title: "Fake",
+    videoURL: "",
+    checked: false,
+    series: 0,
+    repetitions: 0,
+    durationMinutes: 15,
+  };
+  const fakeTrainingSheet: ISportTrainingSheetItem = {
+    id: "",
+    user: "",
+    title: "Fake",
+    active: true,
+    description: "Perder peso",
+    creationDate: new Date(),
+    sunday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+    monday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+    tuesday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+    wednesday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+    thursday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+    friday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+    saturday: [fakeExercice, fakeExercice, fakeExercice, fakeExercice],
+  };
+
   const getSportTrainingSheet = useCallback(() => {
     _loadingStore.setShow(true);
 
@@ -52,6 +76,20 @@ export default function Sport() {
           setTrainingSheets(data);
           setTrainingSheet(data[0]);
         }
+
+        const data = [
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+          fakeTrainingSheet,
+        ];
+
+        setTrainingSheets(data);
+        setTrainingSheet(data[0]);
 
         _loadingStore.setShow(false);
       })

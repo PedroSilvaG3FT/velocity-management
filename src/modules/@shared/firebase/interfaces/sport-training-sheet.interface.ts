@@ -13,6 +13,7 @@ export interface ISportTrainingSheetDB {
   id?: string;
   title: string;
   active: boolean;
+  description: string;
   creationDate: Timestamp;
   user: DocumentReference;
 
