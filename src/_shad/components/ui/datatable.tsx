@@ -1,11 +1,10 @@
 import {
   ColumnDef,
-  OnChangeFn,
-  PaginationState,
   flexRender,
+  useReactTable,
+  PaginationState,
   getCoreRowModel,
   getPaginationRowModel,
-  useReactTable,
 } from "@tanstack/react-table";
 
 import {

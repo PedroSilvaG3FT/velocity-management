@@ -8,12 +8,11 @@ import {
 } from "@/_shad/components/ui/dialog";
 import {
   Table,
+  TableRow,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
-  TableRow,
 } from "@/_shad/components/ui/table";
 import Each from "@/modules/@shared/components/utils/each";
 import { ISportWeightControlItem } from "@/modules/@shared/firebase/interfaces/sport-weight-control.interface";

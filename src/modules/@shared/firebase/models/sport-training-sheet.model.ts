@@ -28,7 +28,7 @@ export class SportTrainingSheetModel {
       id: model.id,
       title: model.title,
       active: model.active,
-
+      description: model.description,
       monday: model.monday,
       tuesday: model.tuesday,
       wednesday: model.wednesday,

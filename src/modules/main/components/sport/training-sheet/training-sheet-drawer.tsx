@@ -81,7 +81,7 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Values : ", values);
+    console.log("Values : ", values, setTrainingSheet);
   }
 
   const onActivitySubmit = (value: ISportTrainingSheetDay) => {
