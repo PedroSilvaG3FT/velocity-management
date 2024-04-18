@@ -141,7 +141,7 @@ export default function Sport() {
 
       <Separator className="my-6" />
 
-      <section className="grid gap-4 grid-cols-[40%_1fr]">
+      <section className="grid gap-4 lg:grid-cols-[40%_1fr]">
         <TrainingSheetWeek data={trainingSheet} />
         <TrainingSheetList data={trainingSheets} />
       </section>

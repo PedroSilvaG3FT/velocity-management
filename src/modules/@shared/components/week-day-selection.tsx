@@ -14,17 +14,26 @@ import { useEffect, useState } from "react";
 import { WeekDayNumber } from "./_types/week.type";
 import { Separator } from "@radix-ui/react-separator";
 import { IWeekDayItem } from "./_interfaces/week.interface";
+import Show from "./utils/show";
 
 interface IWeekDaySelectionProps {
   initial?: WeekDayNumber;
   baseDate?: Date;
+  className?: string;
+  hideDayNumber?: boolean;
   onSelect: (data: IWeekDayItem) => void;
 }
 
 export default function WeekDaySelection(props: IWeekDaySelectionProps) {
   const currentDate = new Date();
   const initialDay = currentDate.getDay() as WeekDayNumber;
-  const { onSelect, initial = initialDay, baseDate = currentDate } = props;
+  const {
+    onSelect,
+    className = "",
+    initial = initialDay,
+    baseDate = currentDate,
+    hideDayNumber = false,
+  } = props;
 
   const [selected, setSelected] = useState<WeekDayNumber>(initial);
   const [days, setDays] = useState<IWeekDayItem[]>([]);
@@ -49,7 +58,7 @@ export default function WeekDaySelection(props: IWeekDaySelectionProps) {
   }, []);
 
   return (
-    <section className="py-4 overflow-x-auto flex gap-3">
+    <section className={cn("py-4 overflow-x-auto flex gap-3", className)}>
       <Each
         data={days}
         render={(item) => (
@@ -65,16 +74,20 @@ export default function WeekDaySelection(props: IWeekDaySelectionProps) {
                 {formatDateLoacale(item.date, "EEE").substring(0, 3)}
               </CardTitle>
 
-              <Separator
-                className={cn(
-                  "w-full border-solid border border-primary",
-                  item.day === selected && "border-secondary"
-                )}
-              />
+              <Show>
+                <Show.When isTrue={!hideDayNumber}>
+                  <Separator
+                    className={cn(
+                      "w-full border-solid border border-primary",
+                      item.day === selected && "border-secondary"
+                    )}
+                  />
 
-              <CardDescription>
-                {formatDateLoacale(item.date, "dd")}
-              </CardDescription>
+                  <CardDescription>
+                    {formatDateLoacale(item.date, "dd")}
+                  </CardDescription>
+                </Show.When>
+              </Show>
             </CardContent>
           </Card>
         )}

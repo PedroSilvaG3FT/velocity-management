@@ -17,12 +17,18 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/_shad/components/ui/dropdown-menu";
+import TrainingSheetDrawer from "./training-sheet-drawer";
+import { useState } from "react";
 
 interface ITrainingSheetListProps {
   data: ISportTrainingSheetItem[];
 }
 export default function TrainingSheetList(props: ITrainingSheetListProps) {
   const { data } = props;
+
+  const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+  const openRegister = () => setIsRegisterOpen(true);
 
   const _getItemById = (id: string) => data.find((item) => item.id === id);
 
@@ -97,10 +103,15 @@ export default function TrainingSheetList(props: ITrainingSheetListProps) {
       <nav className="mb-4 flex items-center justify-between">
         <h2 className="font-xl font-semibold">Minhas fichas de treino </h2>
 
-        <Button>
-          Nova Ficha
-          <Plus className="ml-4" />
-        </Button>
+        <TrainingSheetDrawer
+          isOpen={isRegisterOpen}
+          onOpenChange={(data) => setIsRegisterOpen(data)}
+        >
+          <Button onClick={openRegister}>
+            Nova Ficha
+            <Plus className="ml-4" />
+          </Button>
+        </TrainingSheetDrawer>
       </nav>
 
       <DataTable

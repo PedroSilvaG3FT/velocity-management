@@ -17,6 +17,7 @@ import { Separator } from "@/_shad/components/ui/separator";
 import WeekDaySelection from "@/modules/@shared/components/week-day-selection";
 import { IWeekDayItem } from "@/modules/@shared/components/_interfaces/week.interface";
 import { WeekDayNumber } from "@/modules/@shared/components/_types/week.type";
+import TrainingSheetDayView from "./training-sheet-day-view";
 
 interface ITrainingSheetWeekProps {
   data: ISportTrainingSheetItem;
@@ -53,33 +54,12 @@ export default function TrainingSheetWeek(props: ITrainingSheetWeekProps) {
     <Card>
       <CardHeader>
         <CardTitle>Semana</CardTitle>
-        <WeekDaySelection onSelect={onSelectDay} />
+        <WeekDaySelection onSelect={onSelectDay} className="max-w-[85vw]" />
         <Separator />
       </CardHeader>
 
       <CardContent>
-        <Each
-          data={dayView}
-          empty={<p className="text-center opacity-50">- Dia livre -</p>}
-          render={(item) => (
-            <article className="bg-accent rounded-sm p-2 px-4 mb-4 flex gap-4 items-center justify-end transition-transform hover:scale-95">
-              {item.checked ? <CircleCheck /> : <Circle />}
-
-              <p className="mr-auto">{item.title}</p>
-
-              <Show>
-                <Show.When isTrue={!!item.series && !item.durationMinutes}>
-                  <span>
-                    {item.series}/{item.repetitions}
-                  </span>
-                </Show.When>
-                <Show.Else>
-                  <span>{item.durationMinutes}min</span>
-                </Show.Else>
-              </Show>
-            </article>
-          )}
-        />
+        <TrainingSheetDayView data={dayView} />
       </CardContent>
     </Card>
   );

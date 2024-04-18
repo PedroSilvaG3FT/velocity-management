@@ -84,6 +84,7 @@ export default function WeightControlAddProgress(
               onSubmit={form.handleSubmit(onSubmit)}
             >
               <AppFormInput
+                min={0}
                 type="number"
                 label="Peso Atual"
                 name="currentWeight"
