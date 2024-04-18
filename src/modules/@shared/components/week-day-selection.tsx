@@ -58,7 +58,7 @@ export default function WeekDaySelection(props: IWeekDaySelectionProps) {
   }, []);
 
   return (
-    <section className={cn("py-4 overflow-x-auto flex gap-3", className)}>
+    <section className={cn("py-4 flex gap-4 overflow-x-auto", className)}>
       <Each
         data={days}
         render={(item) => (

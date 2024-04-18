@@ -27,7 +27,7 @@ export default function SignIn() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     signIn(values.email, values.password)
-      .then(() => {})
+      .then(() => navigate("/home"))
       .catch((error) => {
         console.log(error);
       });

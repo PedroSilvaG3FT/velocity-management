@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/_shad/components/ui/button";
 import { DataTable } from "@/_shad/components/ui/datatable";
+import { ISportTrainingSheetItem } from "@/modules/@shared/firebase/interfaces/sport-training-sheet.interface";
 import {
   Pen,
   Plus,
@@ -10,7 +12,6 @@ import {
   ClipboardList,
   MoreHorizontal,
 } from "lucide-react";
-import { ISportTrainingSheetItem } from "@/modules/@shared/firebase/interfaces/sport-training-sheet.interface";
 import {
   DropdownMenu,
   DropdownMenuItem,
@@ -18,17 +19,16 @@ import {
   DropdownMenuTrigger,
 } from "@/_shad/components/ui/dropdown-menu";
 import TrainingSheetDrawer from "./training-sheet-drawer";
-import { useState } from "react";
 
 interface ITrainingSheetListProps {
   data: ISportTrainingSheetItem[];
+  onListUpdate: () => void;
 }
 export default function TrainingSheetList(props: ITrainingSheetListProps) {
-  const { data } = props;
-
+  const { data, onListUpdate } = props;
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-  const openRegister = () => setIsRegisterOpen(true);
+  const [trainingSheetEdit, setTrainingSheetEdit] =
+    useState<ISportTrainingSheetItem>({} as ISportTrainingSheetItem);
 
   const _getItemById = (id: string) => data.find((item) => item.id === id);
 
@@ -39,6 +39,11 @@ export default function TrainingSheetList(props: ITrainingSheetListProps) {
 
   const handleOpenEdit = (id: string) => {
     const item = _getItemById(id);
+
+    if (item) {
+      setTrainingSheetEdit(item);
+      setIsRegisterOpen(true);
+    }
     console.log("handleOpenEdit : ", item);
   };
 
@@ -105,9 +110,18 @@ export default function TrainingSheetList(props: ITrainingSheetListProps) {
 
         <TrainingSheetDrawer
           isOpen={isRegisterOpen}
-          onOpenChange={(data) => setIsRegisterOpen(data)}
+          data={trainingSheetEdit}
+          onFinish={() => {
+            onListUpdate();
+            setIsRegisterOpen(false);
+            setTrainingSheetEdit({} as ISportTrainingSheetItem);
+          }}
+          onOpenChange={(data) => {
+            setIsRegisterOpen(data);
+            if (!data) setTrainingSheetEdit({} as ISportTrainingSheetItem);
+          }}
         >
-          <Button onClick={openRegister}>
+          <Button>
             Nova Ficha
             <Plus className="ml-4" />
           </Button>
@@ -115,8 +129,8 @@ export default function TrainingSheetList(props: ITrainingSheetListProps) {
       </nav>
 
       <DataTable
-        columns={columns}
         data={data}
+        columns={columns}
         pagination={{ pageSize: 5, pageIndex: 0 }}
       />
     </section>

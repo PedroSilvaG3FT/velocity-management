@@ -3,7 +3,7 @@ import VideoBG from "@/assets/video/hero-video.mp4";
 
 export default function AuthenticationLayout() {
   return (
-    <section className="w-full grid h-screen grid-cols-2">
+    <section className="w-full grid h-screen lg:grid-cols-2">
       <figure>
         <video
           loop

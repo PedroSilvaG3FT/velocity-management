@@ -28,6 +28,10 @@ import { IWeekDayItem } from "@/modules/@shared/components/_interfaces/week.inte
 import TrainingSheetDayView from "./training-sheet-day-view";
 import TrainingSheetRegisterActivity from "./training-sheet-register-activity";
 import { WeekDayNumber } from "@/modules/@shared/components/_types/week.type";
+import { SportTrainingSheetModel } from "@/modules/@shared/firebase/models/sport-training-sheet.model";
+import { SportTrainingSheetService } from "@/modules/@shared/firebase/services/sport-training-sheet.service";
+import loadingStore from "@/store/loading.store";
+import _ from "lodash";
 
 const formId = "training-sheet-form";
 const formSchema = z.object({
@@ -36,10 +40,24 @@ const formSchema = z.object({
   description: z.string().min(1, "Campo obrigatório"),
 });
 
-interface ITrainingSheetDrawerProps extends IDrawerProps {}
+interface ITrainingSheetDrawerProps extends IDrawerProps {
+  data?: ISportTrainingSheetItem;
+  onFinish: (data: ISportTrainingSheetItem) => void;
+}
 
 export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
-  const { children } = props;
+  const {
+    isOpen,
+    onOpenChange,
+    children,
+    onFinish,
+    data = {} as ISportTrainingSheetItem,
+  } = props;
+  const isEdit = !!data?.id;
+
+  const _loadingStore = loadingStore((state) => state);
+  const _sportTrainingSheetModel = new SportTrainingSheetModel();
+  const _sportTrainingSheetService = new SportTrainingSheetService();
 
   const [dayView, setDayView] = useState<ISportTrainingSheetDay[]>([]);
   const [isModalActivityOpen, setIsModalActivityOpen] = useState(false);
@@ -81,7 +99,28 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log("Values : ", values, setTrainingSheet);
+    const modelDTO = _sportTrainingSheetModel.buildRegisterDTO({
+      ...data,
+      ...trainingSheet,
+      title: values.title,
+      active: values.active,
+      description: values.description,
+    });
+
+    const $request = !isEdit
+      ? _sportTrainingSheetService.create(modelDTO)
+      : _sportTrainingSheetService.update(String(data.id), modelDTO);
+
+    $request
+      .then(() => {
+        const result = _sportTrainingSheetModel.buildItem(modelDTO);
+        onFinish({ ...data, ...result, id: data.id });
+        form.reset();
+        _loadingStore.setShow(false);
+      })
+      .catch(() => {
+        _loadingStore.setShow(false);
+      });
   }
 
   const onActivitySubmit = (value: ISportTrainingSheetDay) => {
@@ -97,13 +136,11 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
 
       const handleEdit = () => {
         const editedData = items.map((item) => {
-          if (item === dayActivityEdit) item = value;
+          if (_.isEqual(item, dayActivityEdit)) item = value;
           return item;
         });
 
         (trainingSheet[currentDayKey] as ISportTrainingSheetDay[]) = editedData;
-
-        console.log(editedData);
       };
 
       if (isNew) handleCreate();
@@ -133,6 +170,20 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
   };
 
   useEffect(() => {
+    if (isOpen && isEdit) {
+      form.setValue("title", data.title);
+      form.setValue("active", !!data.active);
+      form.setValue("description", data.description);
+
+      setTrainingSheet(data);
+    } else form.reset();
+  }, [isOpen]);
+
+  useEffect(() => {
+    setTrainingSheet(data);
+  }, [data]);
+
+  useEffect(() => {
     if (!dayView?.length) {
       const date = new Date();
       onSelectDay({ date, day: date.getDay() as WeekDayNumber });
@@ -140,7 +191,7 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
   }, [trainingSheet]);
 
   return (
-    <Drawer>
+    <Drawer open={isOpen} onOpenChange={onOpenChange}>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <FormContainer {...form}>
         <DrawerContent>
@@ -195,7 +246,7 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
                 isOpen={isModalActivityOpen}
                 onOpenChange={(data) => {
                   setIsModalActivityOpen(data);
-                  setDayActivityEdit({} as ISportTrainingSheetDay);
+                  if (!data) setDayActivityEdit({} as ISportTrainingSheetDay);
                 }}
               >
                 <div className="mt-4 flex justify-center">

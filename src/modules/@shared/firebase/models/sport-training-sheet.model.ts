@@ -25,17 +25,16 @@ export class SportTrainingSheetModel {
     model: ISportTrainingSheetItem
   ): ISportTrainingSheetDB {
     return {
-      id: model.id,
       title: model.title,
       active: model.active,
       description: model.description,
-      monday: model.monday,
-      tuesday: model.tuesday,
-      wednesday: model.wednesday,
-      thursday: model.thursday,
-      friday: model.friday,
-      saturday: model.saturday,
-      sunday: model.sunday,
+      monday: model.monday || [],
+      tuesday: model.tuesday || [],
+      wednesday: model.wednesday || [],
+      thursday: model.thursday || [],
+      friday: model.friday || [],
+      saturday: model.saturday || [],
+      sunday: model.sunday || [],
 
       user: this.#auth.getUserReference(),
       creationDate: model.creationDate

@@ -39,23 +39,27 @@ export default function TrainingSheetWeek(props: ITrainingSheetWeekProps) {
   };
 
   useEffect(() => {
-    if (!dayView?.length) {
-      const date = new Date();
-      onSelectDay({ date, day: date.getDay() as WeekDayNumber });
-    }
+    const date = new Date();
+    onSelectDay({ date, day: date.getDay() as WeekDayNumber });
   }, [data]);
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Semana</CardTitle>
-        <WeekDaySelection onSelect={onSelectDay} className="max-w-[85vw]" />
-        <Separator />
-      </CardHeader>
+    <>
+      <Card>
+        <CardHeader>
+          <CardTitle>Semana</CardTitle>
 
-      <CardContent>
-        <TrainingSheetDayView data={dayView} />
-      </CardContent>
-    </Card>
+          <WeekDaySelection
+            onSelect={onSelectDay}
+            className="max-w-[calc(100vw-82px)]"
+          />
+          <Separator />
+        </CardHeader>
+
+        <CardContent>
+          <TrainingSheetDayView data={dayView} />
+        </CardContent>
+      </Card>
+    </>
   );
 }
