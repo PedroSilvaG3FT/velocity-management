@@ -12,6 +12,7 @@ import {
 
 import { FirebaseCollectionBase } from "./firebase-collection.base";
 import { IUserDB, IUserRegister } from "../interfaces/user.interface";
+import authStore from "@/store/auth.store";
 
 export interface IFirebaseAuthenticationCredentials {
   email: string;
@@ -88,5 +89,10 @@ export class FirebaseAuthenticationService extends FirebaseCollectionBase {
 
   public signOut() {
     return signOut(this.auth);
+  }
+
+  public getUserReference() {
+    const userId = String(authStore.getState().user.id);
+    return this.getDocumentReference(userId);
   }
 }

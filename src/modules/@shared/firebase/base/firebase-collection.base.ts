@@ -17,6 +17,7 @@ import {
 import { FirebaseApp } from "firebase/app";
 import { FirebaseCollectionHelper } from "./firebase-collection.helper";
 import { FirebaseConnectorService } from "./firebase-connector.service";
+import { FIREBASE_COLLECTION } from "../constans/firebase-collection.contant";
 
 export class FirebaseCollectionBase {
   private _connector = new FirebaseConnectorService();
@@ -68,6 +69,24 @@ export class FirebaseCollectionBase {
 
       return (result || {}) as Data;
     } catch (error) {
+      throw error;
+    }
+  }
+
+  public async getByUserId<Data>(userId: string) {
+    try {
+      const userRef = this.getDocumentReference(
+        userId,
+        FIREBASE_COLLECTION.user
+      );
+
+      const snapshot = await getDocs(
+        query(this.collection, where("user", "==", userRef))
+      );
+
+      const response = await this._helper.getCollectionData<Data>(snapshot);
+      return response as Data[];
+    } catch (error: unknown) {
       throw error;
     }
   }

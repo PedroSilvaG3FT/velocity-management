@@ -1,10 +1,11 @@
+import { ToggleTheme } from "@/modules/@shared/components/toggle-theme";
 import AppAside from "./aside";
 import AppSideMenu from "./side-menu";
 import { Outlet } from "react-router-dom";
 
 export default function MainLayout() {
   return (
-    <section className="flex h-screen w-full flex-col bg-muted/40">
+    <section className="flex h-screen w-full flex-col bg-muted/40 overflow-y-auto">
       <AppAside />
 
       <article className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
@@ -13,6 +14,9 @@ export default function MainLayout() {
         </header>
 
         <main className="flex-1 items-start p-4 sm:px-6 sm:py-0">
+          <article className="fixed top-4 right-4">
+            <ToggleTheme />
+          </article>
           <Outlet />
         </main>
       </article>

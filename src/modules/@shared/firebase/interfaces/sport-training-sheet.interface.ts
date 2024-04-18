@@ -1,9 +1,10 @@
-import { DocumentReference, Timestamp } from 'firebase/firestore';
+import { DocumentReference, Timestamp } from "firebase/firestore";
 
 export interface ISportTrainingSheetDay {
   title: string;
   videoURL: string;
   checked: boolean;
+  series: number;
   repetitions: number;
   durationMinutes: number;
 }
@@ -15,13 +16,17 @@ export interface ISportTrainingSheetDB {
   creationDate: Timestamp;
   user: DocumentReference;
 
+  sunday: ISportTrainingSheetDay[];
   monday: ISportTrainingSheetDay[];
   tuesday: ISportTrainingSheetDay[];
   wednesday: ISportTrainingSheetDay[];
   thursday: ISportTrainingSheetDay[];
   friday: ISportTrainingSheetDay[];
   saturday: ISportTrainingSheetDay[];
-  sunday: ISportTrainingSheetDay[];
 }
 
-export interface ISportTrainingSheetItem {}
+export interface ISportTrainingSheetItem
+  extends Omit<ISportTrainingSheetDB, "creationDate" | "user"> {
+  user: string;
+  creationDate: Date;
+}

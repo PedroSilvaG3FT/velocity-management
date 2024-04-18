@@ -16,16 +16,6 @@ module.exports = {
         "2xl": "1400px",
       },
     },
-    // screens: {
-    //   xs: { min: "320px", max: "475px" },
-    //   sm: { min: "476px", max: "640px" },
-    //   md: { min: "641px", max: "890px" },
-    //   lg: { min: "891px", max: "1024px" },
-    //   xl: { min: "1025px", max: "1280px" },
-    //   mobile: { max: "640px" },
-    //   tablet: { max: "890px" },
-    //   desktop: { max: "1280px" },
-    // },
     extend: {
       colors: {
         border: "hsl(var(--border))",

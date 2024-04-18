@@ -1,5 +1,5 @@
 export const FIREBASE_COLLECTION = {
-  user: `user`,
+  user: `User`,
   feedingMenu: `FeedingMenu`,
 
   vehicle: `Vehicle`,

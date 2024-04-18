@@ -150,6 +150,9 @@ export const TypewriterSmooth = (props: ITypewriterProps) => {
   );
 };
 
-export const typewriterBuildWords = (value: string): ITypewriterWord[] => {
-  return value.split(" ").map((text) => ({ text }));
+export const typewriterBuildWords = (
+  value: string,
+  className: string = ""
+): ITypewriterWord[] => {
+  return value.split(" ").map((text) => ({ text, className }));
 };
