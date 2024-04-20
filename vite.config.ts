@@ -14,6 +14,16 @@ const confgPWA: Partial<VitePWAOptions> = {
     name: "Daily",
     short_name: "daily",
     description: "App de gestão para todas as áreas da sua vida",
+
+    scope: "/",
+    lang: "pt-BR",
+    start_url: "/",
+    display: "standalone",
+    orientation: "portrait",
+
+    theme_color: "#0a0a0a",
+    background_color: "#0a0a0a",
+
     icons: [
       {
         src: "/icons/180x180.png",
@@ -41,12 +51,6 @@ const confgPWA: Partial<VitePWAOptions> = {
         purpose: "any",
       },
     ],
-    scope: "/",
-    start_url: "/",
-    display: "standalone",
-    orientation: "portrait",
-    theme_color: "#0a0a0a",
-    background_color: "#0a0a0a",
   },
 };
 

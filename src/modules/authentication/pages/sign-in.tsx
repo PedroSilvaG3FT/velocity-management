@@ -38,7 +38,7 @@ export default function SignIn() {
       <section>
         <AuthenticationPageNav
           title="Login"
-          subtitle="Enter your email below to login to your account"
+          subtitle="Insira os seus dados para o acesso"
         />
 
         <FormContainer {...form}>
@@ -48,7 +48,7 @@ export default function SignIn() {
               type="email"
               label="Email"
               control={form.control}
-              placeholder="Insert your e-mail"
+              placeholder="Insira o seu e-mail"
             />
 
             <AppFormInput
@@ -63,20 +63,20 @@ export default function SignIn() {
               onClick={() => navigate("/auth/forgot-password")}
               className="ml-auto inline-block text-sm underline"
             >
-              Forgot your password?
+              Esqueceu a senha?
             </a>
 
             <Button type="submit" className="w-full">
-              Submit
+              Entrar
             </Button>
 
             <div className="mt-4 text-center text-sm">
-              Don't have an account?{" "}
+              Não possui conta?{" "}
               <a
                 onClick={() => navigate("/auth/sign-up")}
                 className="underline"
               >
-                Sign up
+                Criar agora
               </a>
             </div>
           </form>
