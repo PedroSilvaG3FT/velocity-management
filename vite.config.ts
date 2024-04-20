@@ -12,7 +12,7 @@ const confgPWA: Partial<VitePWAOptions> = {
   },
   manifest: {
     name: "Daily",
-    short_name: "daily",
+    short_name: "Daily",
     description: "App de gestão para todas as áreas da sua vida",
 
     scope: "/",
