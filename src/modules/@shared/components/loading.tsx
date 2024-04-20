@@ -1,5 +1,5 @@
-import LoadingSpinner from "@/assets/loading.svg";
 import loadingStore from "@/store/loading.store";
+import LoadingSpinner from "@/assets/loading.svg";
 
 export default function AppLoading() {
   const _loadingStore = loadingStore((state) => state);

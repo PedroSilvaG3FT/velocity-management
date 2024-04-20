@@ -49,10 +49,7 @@ export default function TrainingSheetWeek(props: ITrainingSheetWeekProps) {
         <CardHeader>
           <CardTitle>Semana</CardTitle>
 
-          <WeekDaySelection
-            onSelect={onSelectDay}
-            className="max-w-[calc(100vw-82px)]"
-          />
+          <WeekDaySelection onSelect={onSelectDay} />
           <Separator />
         </CardHeader>
 

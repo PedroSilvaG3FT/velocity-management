@@ -4,7 +4,7 @@ import VideoBG from "@/assets/video/hero-video.mp4";
 export default function AuthenticationLayout() {
   return (
     <section className="w-full grid h-screen lg:grid-cols-2">
-      <figure>
+      <figure className="mobile:hidden tablet:hidden">
         <video
           loop
           muted
@@ -17,7 +17,7 @@ export default function AuthenticationLayout() {
       </figure>
 
       <article className="flex items-center justify-center py-12">
-        <main className="mx-auto grid w-[350px] gap-6">
+        <main className="mx-auto grid w-[350px] gap-6 ">
           <Outlet />
         </main>
       </article>

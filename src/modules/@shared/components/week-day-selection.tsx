@@ -58,40 +58,47 @@ export default function WeekDaySelection(props: IWeekDaySelectionProps) {
   }, []);
 
   return (
-    <section className={cn("py-4 flex gap-4 overflow-x-auto", className)}>
-      <Each
-        data={days}
-        render={(item) => (
-          <Card
-            onClick={() => handleSelect(item)}
-            className={cn(
-              "bg-accent p-4 cursor-pointer transition-all duration-300 hover:scale-95",
-              item.day === selected && "bg-foreground text-secondary"
-            )}
-          >
-            <CardContent className="p-0 w-12 flex gap-2 flex-col items-center justify-center">
-              <CardTitle className="capitalize">
-                {formatDateLoacale(item.date, "EEE").substring(0, 3)}
-              </CardTitle>
-
-              <Show>
-                <Show.When isTrue={!hideDayNumber}>
-                  <Separator
-                    className={cn(
-                      "w-full border-solid border border-primary",
-                      item.day === selected && "border-secondary"
-                    )}
-                  />
-
-                  <CardDescription>
-                    {formatDateLoacale(item.date, "dd")}
-                  </CardDescription>
-                </Show.When>
-              </Show>
-            </CardContent>
-          </Card>
+    <article className="grid">
+      <section
+        className={cn(
+          "py-4 flex gap-4 whitespace-nowrap overflow-x-auto",
+          className
         )}
-      />
-    </section>
+      >
+        <Each
+          data={days}
+          render={(item) => (
+            <Card
+              onClick={() => handleSelect(item)}
+              className={cn(
+                "bg-accent p-4 cursor-pointer transition-all duration-300 hover:scale-95",
+                item.day === selected && "bg-foreground text-secondary"
+              )}
+            >
+              <CardContent className="p-0 w-12 flex gap-2 flex-col items-center justify-center">
+                <CardTitle className="capitalize font-light">
+                  {formatDateLoacale(item.date, "EEE").substring(0, 3)}
+                </CardTitle>
+
+                <Show>
+                  <Show.When isTrue={!hideDayNumber}>
+                    <Separator
+                      className={cn(
+                        "w-full border-solid border border-primary",
+                        item.day === selected && "border-secondary"
+                      )}
+                    />
+
+                    <CardDescription>
+                      {formatDateLoacale(item.date, "dd")}
+                    </CardDescription>
+                  </Show.When>
+                </Show>
+              </CardContent>
+            </Card>
+          )}
+        />
+      </section>
+    </article>
   );
 }

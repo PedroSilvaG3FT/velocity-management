@@ -212,10 +212,10 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
                 onSubmit={form.handleSubmit(onSubmit)}
               >
                 <AppFormInput
-                  label="Nome"
+                  label="Titulo"
                   name="title"
                   control={form.control}
-                  placeholder="Insira um nome para a sua ficha"
+                  placeholder="Insira um titulo para a sua ficha"
                 />
 
                 <AppFormTextarea
@@ -227,8 +227,8 @@ export default function TrainingSheetDrawer(props: ITrainingSheetDrawerProps) {
 
                 <AppFormSwitch
                   name="active"
-                  label="Ficha atual"
                   control={form.control}
+                  label="Definir como ficha em uso"
                 />
               </form>
 

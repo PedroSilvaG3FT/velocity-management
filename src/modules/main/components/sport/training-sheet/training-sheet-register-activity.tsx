@@ -74,7 +74,7 @@ export default function TrainingSheetRegisterActivity(
       <DialogTrigger asChild>{children}</DialogTrigger>
 
       <FormContainer {...form}>
-        <DialogContent className="sm:max-w-[425px] max-h-[80vh] overflow-y-auto">
+        <DialogContent className="w-[425px] max-h-[80vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>Registro de atividade</DialogTitle>
           </DialogHeader>

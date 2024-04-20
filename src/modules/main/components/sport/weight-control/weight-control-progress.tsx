@@ -31,7 +31,7 @@ export default function WeightControlProgressModal(
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px] ">
+      <DialogContent className="w-[425px]">
         <DialogHeader>
           <DialogTitle>Progresso</DialogTitle>
         </DialogHeader>

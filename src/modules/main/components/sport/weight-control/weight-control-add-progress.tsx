@@ -72,7 +72,7 @@ export default function WeightControlAddProgress(
       <DialogTrigger asChild>{children}</DialogTrigger>
 
       <FormContainer {...form}>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="w-[425px]">
           <DialogHeader>
             <DialogTitle>Atualizar peso atual</DialogTitle>
           </DialogHeader>
