@@ -1,6 +1,7 @@
 import { useContext } from "react";
+import Logo from "@/assets/logo.png";
+import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { LogOut, CalendarDays } from "lucide-react";
 import { AuthContext } from "@/contexts/auth.context.tsx";
 import { MAIN_MENU_ITEMS } from "../constants/menu.constant.tsx";
 import {
@@ -16,17 +17,20 @@ export default function AppAside() {
   return (
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
-        <a className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base">
-          <CalendarDays className="h-4 w-4 transition-all group-hover:scale-110" />
-          <span className="sr-only">Acme Inc</span>
-        </a>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <img src={Logo} alt="D" />
+          </TooltipTrigger>
+
+          <TooltipContent side="right">Daily</TooltipContent>
+        </Tooltip>
 
         {MAIN_MENU_ITEMS.map((item, index) => (
           <Tooltip key={index}>
             <TooltipTrigger asChild>
               <a
                 onClick={() => navigate(item.url)}
-                className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-all duration-300 hover:text-foreground md:h-8 md:w-8 hover:scale-125"
+                className="cursor-pointer flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-all duration-300 hover:text-foreground md:h-8 md:w-8 hover:scale-110"
               >
                 <item.icon className="h-5 w-5" />
                 <span className="sr-only">{item.title}</span>
@@ -47,7 +51,7 @@ export default function AppAside() {
               <LogOut className="h-5 w-5" />
             </a>
           </TooltipTrigger>
-          <TooltipContent side="right">Settings</TooltipContent>
+          <TooltipContent side="right">Sair</TooltipContent>
         </Tooltip>
       </nav>
     </aside>
