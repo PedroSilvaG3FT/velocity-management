@@ -4,6 +4,7 @@ import react from "@vitejs/plugin-react";
 import { VitePWA, VitePWAOptions } from "vite-plugin-pwa";
 
 const confgPWA: Partial<VitePWAOptions> = {
+  injectRegister: "auto",
   registerType: "autoUpdate",
   workbox: {
     clientsClaim: true,
@@ -18,33 +19,33 @@ const confgPWA: Partial<VitePWAOptions> = {
         src: "/icons/180x180.png",
         sizes: "180x180",
         type: "image/png",
-        purpose: "apple touch icon",
+        purpose: "any",
       },
       {
         src: "/icons/192x192.png",
         sizes: "192x192",
         type: "image/png",
-        purpose: "favicon",
+        purpose: "any",
       },
       {
         src: "/icons/512x512.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "favicon",
+        purpose: "any",
       },
 
       {
         src: "/icons/512x512.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "any",
       },
     ],
     scope: "/",
     start_url: "/",
     display: "standalone",
     orientation: "portrait",
-    theme_color: "#FFFF",
+    theme_color: "#0a0a0a",
     background_color: "#0a0a0a",
   },
 };
