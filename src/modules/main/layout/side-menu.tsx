@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import Logo from "@/assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import { PanelLeft, LogOut } from "lucide-react";
 import { Button } from "@/_shad/components/ui/button";
 import { AuthContext } from "@/contexts/auth.context";
-import { Package2, PanelLeft, LogOut } from "lucide-react";
 import { MAIN_MENU_ITEMS } from "../constants/menu.constant";
 import { Sheet, SheetContent, SheetTrigger } from "@/_shad/components/ui/sheet";
 
