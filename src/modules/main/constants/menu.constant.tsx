@@ -1,10 +1,18 @@
 import { IMenuItem } from "../interfaces/menu.interface";
-import { Home, CarFront, Apple, Dumbbell, HandCoins } from "lucide-react";
+import {
+  Home,
+  BarChart,
+  Users,
+  Settings,
+  Boxes,
+  Component,
+} from "lucide-react";
 
 export const MAIN_MENU_ITEMS: IMenuItem[] = [
-  { url: `home`, icon: Home, title: `Home` },
-  { url: `vehicle`, icon: CarFront, title: `Veiculos` },
-  { url: `feeding`, icon: Apple, title: `Alimentação` },
-  { url: `sport`, icon: Dumbbell, title: `Esportes` },
-  { url: `financial`, icon: HandCoins, title: `Financeiro` },
+  { url: ``, icon: Home, title: `Home` },
+  { url: `billing`, icon: BarChart, title: `Consumo` },
+  { url: `group`, icon: Boxes, title: `Grupos` },
+  { url: `user`, icon: Users, title: `Usuários` },
+  { url: `settings`, icon: Settings, title: `Configurações` },
+  { url: `playground`, icon: Component, title: `Playground` },
 ];

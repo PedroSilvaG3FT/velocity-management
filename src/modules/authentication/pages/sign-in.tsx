@@ -3,17 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/_shad/components/ui/button";
 import { AuthContext } from "@/contexts/auth.context";
 import AuthenticationPageNav from "../components/page-nav";
+import Animate from "@/modules/@shared/components/utils/animate";
 
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormContainer } from "@/_shad/components/ui/form";
 import AppFormInput from "@/modules/@shared/components/form/form-input";
-import Animate from "@/modules/@shared/components/utils/animate";
 
 const formSchema = z.object({
-  email: z.string().min(1, "Required field"),
-  password: z.string().min(1, "Required field"),
+  email: z.string().min(1, "Campo obrigatório"),
+  password: z.string().min(1, "Campo obrigatório"),
 });
 
 export default function SignIn() {
@@ -27,7 +27,7 @@ export default function SignIn() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     signIn(values.email, values.password)
-      .then(() => navigate("/home"))
+      .then(() => navigate("/"))
       .catch((error) => {
         console.log(error);
       });
@@ -52,31 +52,23 @@ export default function SignIn() {
             />
 
             <AppFormInput
+              label="Senha"
               name="password"
               type="password"
-              label="Password"
               control={form.control}
               placeholder="**********"
             />
-
-            <a
-              onClick={() => navigate("/auth/forgot-password")}
-              className="ml-auto inline-block text-sm underline"
-            >
-              Esqueceu a senha?
-            </a>
 
             <Button type="submit" className="w-full">
               Entrar
             </Button>
 
             <div className="mt-4 text-center text-sm">
-              Não possui conta?{" "}
               <a
-                onClick={() => navigate("/auth/sign-up")}
-                className="underline"
+                onClick={() => navigate("/auth/sign-in-methods")}
+                className="underline cursor-pointer"
               >
-                Criar agora
+                Ver opções de login
               </a>
             </div>
           </form>

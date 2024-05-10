@@ -1,14 +1,10 @@
 import authStore from "@/store/auth.store";
 import React, { createContext } from "react";
 import loadingStore from "@/store/loading.store";
-import { IUser } from "../modules/@shared/firebase/interfaces/user.interface";
-import { UserService } from "@/modules/@shared/firebase/services/user.service";
-import { DatabaseModel } from "@/modules/@shared/firebase/models/database.model";
+import { UserService } from "@/modules/@shared/services/user.service";
 
 interface IAuthContext {
-  user: IUser;
   signOut: () => void;
-  firebaseToken: string;
   signIn: (email: string, password: string) => Promise<void>;
 }
 
@@ -17,14 +13,11 @@ interface IAuthProviderProps {
 }
 
 const AuthContext = createContext<IAuthContext>({
-  firebaseToken: "",
-  user: {} as IUser,
   signOut: () => {},
   signIn: () => new Promise<void>(() => {}),
 });
 
 const userService = new UserService();
-const databaseModel = new DatabaseModel();
 
 const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   const _authStore = authStore((state) => state);
@@ -38,16 +31,11 @@ const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
     try {
       _loadingStore.setShow(true);
 
-      const response = await userService.signIn({
-        email,
-        password,
-      });
+      const response = await userService.signIn({ email, password });
+      const { token, user } = response;
 
-      const { refreshToken, accessToken, data } = response.user;
-
-      _authStore.setFirebaseToken(accessToken);
-      _authStore.setFirebaseRefreshToken(refreshToken);
-      _authStore.setUser(databaseModel.user.buildItem(data));
+      _authStore.setUser(user);
+      _authStore.setToken(token);
 
       _loadingStore.setShow(false);
     } catch (error) {
@@ -57,10 +45,8 @@ const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
   };
 
   const providerValue: IAuthContext = {
-    user: _authStore.user,
     signIn,
     signOut,
-    firebaseToken: _authStore.firebaseToken,
   };
 
   return (

@@ -76,7 +76,7 @@ export default function WeekDaySelection(props: IWeekDaySelectionProps) {
               )}
             >
               <CardContent className="p-0 w-12 flex gap-2 flex-col items-center justify-center">
-                <CardTitle className="capitalize font-light">
+                <CardTitle className="capitalize font-semibold">
                   {formatDateLoacale(item.date, "EEE").substring(0, 3)}
                 </CardTitle>
 

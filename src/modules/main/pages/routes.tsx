@@ -1,22 +1,26 @@
 import { RouteObject } from "react-router-dom";
 
+import User from "./user";
 import Home from "./home";
+import Group from "./group";
+import Billing from "./billing";
+import Profile from "./profile";
+import Settings from "./settings";
+import Playground from "./playground";
 import MainLayout from "../layout/main-layout";
-import Feeding from "./feeding";
-import Financial from "./financial";
-import Sport from "./sport";
-import Vehicle from "./vehicle";
 
 export const MAIN_ROUTES: RouteObject[] = [
   {
     path: "",
     element: <MainLayout />,
     children: [
-      { path: "home", Component: Home },
-      { path: "sport", Component: Sport },
-      { path: "vehicle", Component: Vehicle },
-      { path: "feeding", Component: Feeding },
-      { path: "financial", Component: Financial },
+      { path: "", Component: Home },
+      { path: "user", Component: User },
+      { path: "group", Component: Group },
+      { path: "billing", Component: Billing },
+      { path: "profile", Component: Profile },
+      { path: "settings", Component: Settings },
+      { path: "playground", Component: Playground },
     ],
   },
 ];

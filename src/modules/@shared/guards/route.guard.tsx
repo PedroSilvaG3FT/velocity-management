@@ -7,7 +7,11 @@ const RouteGuardWrapper: React.FC = () => {
   const _authStore = authStore((state) => state);
 
   const checkUserToken = () => {
-    if (!_authStore.firebaseToken) navigate(`/auth/sign-in`);
+    console.log("OOOOPA", _authStore);
+    if (!_authStore.token) {
+      console.log("OOOOPA ENTREI");
+      navigate(`/auth/sign-in`);
+    }
   };
 
   useEffect(() => {

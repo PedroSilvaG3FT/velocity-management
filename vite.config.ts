@@ -11,8 +11,8 @@ const confgPWA: Partial<VitePWAOptions> = {
     skipWaiting: true,
   },
   manifest: {
-    name: "Daily",
-    short_name: "Daily",
+    name: "Velocity",
+    short_name: "Velocity",
     description: "App de gestão para todas as áreas da sua vida",
 
     scope: "/",
