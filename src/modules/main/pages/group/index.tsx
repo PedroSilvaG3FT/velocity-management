@@ -42,7 +42,7 @@ export default function Group() {
     <section>
       <h2 className="mb-6 text-lg font-bold">Grupos</h2>
 
-      <section className="grid gap-4 grid-cols-4">
+      <section className="grid gap-4 grid-cols-4 tablet:grid-cols-2 mobile:grid-cols-1">
         <Each
           data={groups}
           render={(item) => (
